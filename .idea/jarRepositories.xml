@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="RemoteRepositoriesConfiguration">
+    <remote-repository>
+      <option name="id" value="opf-gen-3rdparty-local" />
+      <option name="name" value="mspu uk repository" />
+      <option name="url" value="https://uex-repo.hq.k.grp/artifactory/opf-gen-3rdparty-local" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="central" />
+      <option name="name" value="Central Repository" />
+      <option name="url" value="https://repo.maven.apache.org/maven2" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="opf-mvn-dev-local" />
+      <option name="name" value="mspu uk repository" />
+      <option name="url" value="https://uex-repo.hq.k.grp/artifactory/opf-mvn-dev-local" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="central" />
+      <option name="name" value="Maven Central repository" />
+      <option name="url" value="https://repo1.maven.org/maven2" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="jboss.community" />
+      <option name="name" value="JBoss Community repository" />
+      <option name="url" value="https://repository.jboss.org/nexus/content/repositories/public/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="artifactory-legacy" />
+      <option name="name" value="artifactory-legacy" />
+      <option name="url" value="https://uex-repo.hq.k.grp/artifactory/z-legacy-opf" />
+    </remote-repository>
+  </component>
+</project>
