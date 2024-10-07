@@ -1,4 +1,4 @@
-package ping;
+package com.rest.service.core.ping;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class Ping {
 
     // Create a GET API for /ping
-    @GetMapping("/ping")
+    @GetMapping("/rest-service/admin/v1/ping")
     public String ping() {
         return "pong";
     }
