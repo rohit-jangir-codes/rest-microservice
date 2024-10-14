@@ -8,7 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/service/v1/account")
+@RequestMapping("/dfc/v1/account")
 @Slf4j
 public class AccountResource {
 
@@ -30,6 +30,28 @@ public class AccountResource {
         } catch (Exception e) {
             log.error("Error getting account", e);
             return ResponseEntity.badRequest().body("Error getting account");
+        }
+    }
+
+    @PutMapping("/updateAccount/{accountId}")
+    public ResponseEntity<Object> updateAccount(@PathVariable String accountId, @RequestBody AccountModel accountModel) {
+        try {
+            createAccountService.updateAccount(accountId, accountModel);
+            return ResponseEntity.ok().body("Account updated successfully");
+        } catch (Exception e) {
+            log.error("Error updating account", e);
+            return ResponseEntity.badRequest().body("Error updating account");
+        }
+    }
+
+    @PutMapping("/updatePassword/{accountId}")
+    public ResponseEntity<Object> updatePassword(@PathVariable String accountId, @RequestBody String oldPassword, @RequestBody String newPassword) {
+        try {
+            createAccountService.updatePassword(accountId, oldPassword, newPassword);
+            return ResponseEntity.ok().body("Password updated successfully");
+        } catch (Exception e) {
+            log.error("Error updating password", e);
+            return ResponseEntity.badRequest().body("Error updating password");
         }
     }
 }

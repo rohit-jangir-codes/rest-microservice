@@ -1,6 +1,7 @@
 package com.rest.service.core.dao;
 
 import com.rest.service.core.model.AccountModel;
+import com.rest.service.core.model.ProductSubscription;
 import com.rest.service.core.model.PropertiesValues;
 import jakarta.annotation.PostConstruct;
 import org.slf4j.Logger;
@@ -24,6 +25,9 @@ public class AccountDaoImpl implements AccountDao {
 
     @Autowired
     AccountModel accountModel;
+
+    @Autowired
+    ProductSubscription productSubscription;
 
     private static final String ACCOUNT_CREATION = "account";
 
@@ -50,7 +54,12 @@ public class AccountDaoImpl implements AccountDao {
                         .on(PropertiesValues.Phone_Number, Sort.Direction.ASC));
         mongoTemplate.indexOps(PRODUCT_SUBSCRIPTION)
                 .ensureIndex(new Index()
-                        .on(PropertiesValues.ACCOUNT_ID, Sort.Direction.ASC));
+                        .on(PropertiesValues.SUBSCRIPTION_ID, Sort.Direction.ASC));
+        mongoTemplate.indexOps(PRODUCT_SUBSCRIPTION)
+                .ensureIndex(new Index()
+                        .on(PropertiesValues.ACCOUNT_ID, Sort.Direction.ASC)
+                        .on(PropertiesValues.SUBSCRIPTION_ID, Sort.Direction.ASC)
+                        .on(PropertiesValues.CHANNEL_ID, Sort.Direction.ASC));
     }
 
     @Override
@@ -102,5 +111,45 @@ public class AccountDaoImpl implements AccountDao {
     @Override
     public boolean doesAccountExist(String accountId) {
         return mongoTemplate.exists(new Query(Criteria.where(PropertiesValues.ACCOUNT_ID).is(accountId)), AccountModel.class, ACCOUNT_CREATION);
+    }
+
+    @Override
+    public void createSubscription(ProductSubscription productSubscription) {
+        try {
+            mongoTemplate.save(productSubscription, PRODUCT_SUBSCRIPTION);
+            log.info("Subscription created");
+        } catch (Exception e) {
+            log.error("Error creating subscription", e);
+        }
+    }
+
+    @Override
+    public ProductSubscription getSubscriptionByAccountId(String accountId) {
+        return mongoTemplate.findOne(
+                new Query(Criteria.where(PropertiesValues.ACCOUNT_ID).is(accountId)),
+                ProductSubscription.class,
+                PRODUCT_SUBSCRIPTION
+        );
+    }
+
+    @Override
+    public ProductSubscription getSubscriptionBySubscriptionId(String subscriptionId) {
+        return mongoTemplate.findOne(
+                new Query(Criteria.where(PropertiesValues.SUBSCRIPTION_ID).is(subscriptionId)),
+                ProductSubscription.class,
+                PRODUCT_SUBSCRIPTION
+        );
+    }
+
+    @Override
+    public void deleteProductSubscriptionBySubscriptionId(String subscriptionId) {
+        mongoTemplate.remove(subscriptionId, PRODUCT_SUBSCRIPTION);
+        log.info("Subscription deleted for subscriptionId: " + subscriptionId);
+    }
+
+    @Override
+    public void deleteProductSubscriptionByAccountId(String accountId) {
+        mongoTemplate.remove(accountId, PRODUCT_SUBSCRIPTION);
+        log.info("Subscription deleted for accountId: " + accountId);
     }
 }

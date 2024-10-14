@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/service/v1/event")
+@RequestMapping("/dfc/v1/event")
 @Slf4j
 public class EventResourceController {
 
