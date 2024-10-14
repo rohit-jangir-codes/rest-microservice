@@ -1,6 +1,0 @@
-resources\v1\ApiResources.class
-com\rest\service\core\configuration\ServiceMongo.class
-com\rest\service\core\configuration\MongoDBConfiguration.class
-com\rest\service\core\ping\Ping.class
-com\rest\service\core\Application.class
-com\rest\service\core\configuration\MongoDBConfiguration$User.class
